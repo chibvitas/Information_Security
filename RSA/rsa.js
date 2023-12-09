@@ -5,9 +5,9 @@ function isPrime(num) {
 }
 
 // Генерация случайного простого числа
-function randomPrime(bits) {
-    bits = Math.floor(bits);
-    const potentialPrimes = Array.from({ length: bits - 3 }, (_, i) => 2 + i);
+function randomPrime(max) {
+    max = Math.floor(max);
+    const potentialPrimes = Array.from({ length: max - 3 }, (_, i) => 2 + i);
     return potentialPrimes.filter(isPrime)[Math.floor(Math.random() * potentialPrimes.filter(isPrime).length)];
 }
 
@@ -31,9 +31,9 @@ function modInverse(a, m) {
 }
 
 // Генерация ключей RSA
-function generateRSAKeys(bits) {
-    const p = randomPrime(bits);
-    const q = randomPrime(bits);
+function generateRSAKeys(max) {
+    const p = randomPrime(max);
+    const q = randomPrime(max);
 
     const n = p * q;
     const phi = (p - 1) * (q - 1);
@@ -84,8 +84,8 @@ function decrypt(encryptedMessage, privateKey) {
     return decryptedMessage.join('');
 }
 
-const bits = 1000;
-const keys = generateRSAKeys(bits);
+const max = 1000;
+const keys = generateRSAKeys(max);
 const publicKey = keys.publicKey;
 const privateKey = keys.privateKey;
 
